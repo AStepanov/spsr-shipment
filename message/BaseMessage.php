@@ -58,7 +58,7 @@ abstract class BaseMessage extends BaseType
     /**
      * @return SimpleXMLElement
      */
-    public function asXml()
+    public function asXml($forceXmlNs = null)
     {
         $version = $this->getMethodVersion();
         $xmlNode = new SimpleXMLElement("<root xmlns=\"{$this->getXmlNs()}\"/>");
