@@ -1,0 +1,29 @@
+{
+    "name": "stp/spsr-shipment",
+    "description": "API for SPSR-EXPRESS shipping",
+    "keywords": ["api", "shipping"],
+    "homepage": "https://github.com/AStepanov",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Andrey Stepanov",
+            "email": "isteep@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "ext-simplexml": "*",
+        "ext-curl": "*"
+    },
+    "require-dev": {
+        "codeception/codeception": "*",
+        "codeception/specify": "*",
+        "codeception/verify": "*"
+    },
+    "minimum-stability": "stable",
+    "autoload": {
+        "psr-4": {
+            "stp\\spsr\\": ""
+        }
+    }
+}

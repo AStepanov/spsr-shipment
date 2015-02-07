@@ -1,0 +1,187 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema targetNamespace="http://debug.cpcr.ru/xsd/"
+    elementFormDefault="qualified"
+    xmlns="http://spsr.ru/webapi/"
+    xmlns:mstns="http://spsr.ru/webapi/"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+		   
+>	
+	
+	<xs:simpleType name="Lang" id="Lang">
+		<xs:restriction base="xs:string" >
+			<xs:enumeration value="ru" />
+			<xs:enumeration value="en" />
+		</xs:restriction>
+	</xs:simpleType>
+	
+	
+	
+	<xs:simpleType name="DeliveryMode" id="DeliveryMode">
+		<xs:restriction base="xs:nonNegativeInteger">
+			<xs:minInclusive value="0" id="DeliveryMode.minInclusive"/>
+			<xs:maxInclusive value="31" id="DeliveryMode.maxInclusive"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="IDs" id="IDs">
+		<xs:restriction base="xs:nonNegativeInteger">
+			<xs:minInclusive value="0" id="IDs.minInclusive"/>
+		</xs:restriction>
+	</xs:simpleType>
+  
+	<xs:simpleType name="DateTime" id="DateTime">
+		<xs:annotation >
+      <xs:documentation>Дата в формате 2011-12-26T13:52:52.433</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[1-9][0-9]{3}\-.+T([0-1][0-9]|[2][0-3]):[0-5][0-9]:[0-5][0-9]\.[0-9]{3}"/>
+			<!--<xs:pattern value="YYYY-MM-DD'T'HH:MI:SS"/>-->
+		</xs:restriction>
+	</xs:simpleType>
+	
+    <xs:simpleType name="SID" id="SID">
+		<xs:annotation >
+      <xs:documentation>Идентификатор сессии, 40 символов</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+      <xs:minLength value="32" />
+			<xs:maxLength value="40" />
+		</xs:restriction>
+	</xs:simpleType>
+	
+    <xs:simpleType name="Login" id="Login">
+		<xs:annotation >
+      <xs:documentation>Логин учетной записи, 100 символов</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="100" />
+		</xs:restriction>
+	</xs:simpleType>
+	
+    <xs:simpleType name="ICN" id="ICN">
+		<xs:annotation >
+      <xs:documentation>Номер договора, строго 10 цифр</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[0-9]{10}" />
+		</xs:restriction>
+	</xs:simpleType>
+
+    <xs:simpleType name="string20" id="string20">
+		<xs:annotation >
+      <xs:documentation>20 цифирей</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="20" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="NullableFlag" id="NullableFlag">
+		<xs:restriction base="xs:integer">
+      <xs:pattern value="-1|0|1" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="BarCode" id="BarCode">
+		<xs:annotation>
+			<xs:documentation>ШК вложимого: строка из цифр, 12 символов, начинается с 20</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="20[0-9]{10}" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	
+  <xs:simpleType name="String10">
+    <xs:annotation>
+      <xs:documentation>Ограничение строки в 10 символов</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="10" />
+    </xs:restriction>
+  </xs:simpleType>	
+	
+  <xs:simpleType name="String50">
+    <xs:annotation>
+      <xs:documentation>Ограничение строки в 50 символов</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="50" />
+    </xs:restriction>
+  </xs:simpleType>
+  
+  <xs:simpleType name="String60">
+    <xs:annotation>
+      <xs:documentation>Ограничение строки в 60 символов</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="60" />
+    </xs:restriction>
+  </xs:simpleType>
+	<xs:simpleType name="String70">
+		<xs:annotation>
+			<xs:documentation>Ограничение строки в 70 символов</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="70" />
+		</xs:restriction>
+	</xs:simpleType>
+	
+  <xs:simpleType name="String100">
+    <xs:annotation>
+      <xs:documentation>Ограничение строки в 100 символов</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="100" />
+    </xs:restriction>
+  </xs:simpleType>
+
+	<xs:simpleType name="String200">
+		<xs:annotation>
+			<xs:documentation>Ограничение строки в 200 символов</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="200" />
+		</xs:restriction>
+	</xs:simpleType>
+	
+  <xs:simpleType name="String255">
+    <xs:annotation>
+      <xs:documentation>Ограничение строки в 255 символов</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="255" />
+    </xs:restriction>
+  </xs:simpleType>
+	<xs:simpleType name="String1024">
+		<xs:annotation>
+			<xs:documentation>Ограничение строки в 1024 символов</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="1024" />
+		</xs:restriction>
+	</xs:simpleType>
+	
+  <xs:simpleType name="flag">
+    <xs:annotation>
+      <xs:documentation>Флаговый тип, допускает значения, 1-вкл, 0-выкл</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:unsignedByte">
+      <xs:minInclusive value="0" />
+      <xs:maxInclusive value="1" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="PostCode" id="PostCode">
+    <xs:annotation>
+      <xs:documentation>Почтовый индекс, 6 цифр</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[0-9]{6}" />
+    </xs:restriction>
+  </xs:simpleType>	
+	
+	
+	
+	
+</xs:schema>

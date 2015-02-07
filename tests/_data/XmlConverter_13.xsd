@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="windows-1251"?>
+<xs:schema targetNamespace="http://spsr.ru/webapi/xmlconverter/1.3" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           elementFormDefault="qualified" attributeFormDefault="unqualified"
+           xmlns:st="http://debug.cpcr.ru/xsd/">
+  
+  <xs:import namespace="http://debug.cpcr.ru/xsd/" schemaLocation="Simple_types.xsd"/>
+
+  <xs:element name="root">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:any  processContents="skip" namespace="http://spsr.ru/webapi/WA/1.0" />
+        <xs:element name="Login" minOccurs="0" maxOccurs="1">
+          <xs:complexType>
+            <xs:attribute name="SID" type="st:SID" use="optional" />
+          </xs:complexType>
+        </xs:element>        
+        <xs:element name="XmlConverter" minOccurs="1" maxOccurs="1">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="GeneralInfo" minOccurs="1" maxOccurs="1">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element minOccurs="1" maxOccurs="500" name="Invoice">
+                      <xs:complexType>
+                        <xs:all>
+                          <xs:element name="Shipper" minOccurs="0" maxOccurs="1">
+                            <xs:complexType>
+                              <xs:attribute name="PostCode" type="st:PostCode" use="optional" />
+                              <xs:attribute name="Country" type="xs:string" use="optional" />
+                              <xs:attribute name="Region" type="xs:string" use="optional" />
+                              <xs:attribute name="City" type="xs:string" use="required" />
+                              <xs:attribute name="Address" type="st:String100" use="required" />
+                              <xs:attribute name="CompanyName" type="st:String100" use="optional" />
+                              <xs:attribute name="ContactName" type="st:String60" use="optional" />
+                              <xs:attribute name="Phone" type="st:string20" use="optional" />
+                              <xs:attribute name="Email" type="st:String255" use="optional" />
+                              <xs:attribute name="City_ID" type="st:IDs" use="optional" />
+                              <xs:attribute name="City_Owner_ID" type="st:IDs" use="optional" />
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element name="Receiver" minOccurs="1" maxOccurs="1">
+                            <xs:complexType>
+                              <xs:attribute name="PostCode" type="st:PostCode" use="optional" />
+                              <xs:attribute name="Country" type="xs:string" use="optional" />
+                              <xs:attribute name="Region" type="xs:string" use="optional" />
+                              <xs:attribute name="City" type="xs:string" use="required" />
+                              <xs:attribute name="Address" type="st:String100" use="required" />
+                              <xs:attribute name="CompanyName" type="st:String100" use="optional" />
+                              <xs:attribute name="ContactName" type="st:String60" use="optional" />
+                              <xs:attribute name="Phone" type="xs:string" use="optional" />
+                              <xs:attribute name="Email" type="st:String255" use="optional" />
+                              <xs:attribute name="City_ID" type="st:IDs" use="optional" />
+                              <xs:attribute name="City_Owner_ID" type="st:IDs" use="optional" />
+                              <xs:attribute name="ConsigneeCollect" use="optional" />
+                              <xs:attribute name="Comment" type="st:String100" use="optional" />
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element name="CustomerInfo" minOccurs="0" maxOccurs="1">
+                            <xs:complexType>
+                              <xs:attribute name="Info1" type="st:String255" use="optional" />
+                              <xs:attribute name="Info2" type="st:String255" use="optional" />
+                              <xs:attribute name="Info3" type="st:String255" use="optional" />
+                              <xs:attribute name="Info4" type="st:String255" use="optional" />
+                              <xs:attribute name="Info5" type="st:String255" use="optional" />
+                              <xs:attribute name="Info6" type="st:String255" use="optional" />
+                              <xs:attribute name="Info7" type="st:String255" use="optional" />
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element name="AdditionalServices" minOccurs="0" maxOccurs="1">
+                            <xs:complexType>
+                              <xs:attribute name="COD" type="st:flag" use="optional" default="0">
+                                <xs:annotation>
+                                  <xs:documentation>Оплата товара в момент получения</xs:documentation>
+                                  <xs:documentation>1 - услуга выбрана</xs:documentation>
+                                </xs:annotation>
+                              </xs:attribute>
+                              <xs:attribute name="PartDelivery" type="st:flag" use="optional" default="0">
+                                <xs:annotation>
+                                  <xs:documentation>Частичная доставка</xs:documentation>
+                                  <xs:documentation>1 - услуга выбрана</xs:documentation>
+                                </xs:annotation>
+                              </xs:attribute>
+                              <xs:attribute name="ReturnDoc" use="optional" default="0">
+                                <xs:simpleType>
+                                  <xs:annotation>
+                                    <xs:documentation>Возврат сопроводительных документов</xs:documentation>
+                                    <xs:documentation>1 - услуга выбрана</xs:documentation>
+                                  </xs:annotation>
+                                  <xs:restriction base="xs:unsignedByte">
+                                    <xs:minInclusive value="0" />
+                                    <xs:maxInclusive value="1" />
+                                  </xs:restriction>
+                                </xs:simpleType>
+                              </xs:attribute>
+                              <xs:attribute name="ReturnDocType" use="optional" default="0">
+                                <xs:simpleType>
+                                  <xs:annotation>
+                                    <xs:documentation>Тип возврата сопроводительных документов
+										"0"- Стандартная услуга ВСД
+										"1"- Услуга ВСД с проверкой заполненяемых документов.
+										"2"- Услуга ВСД с проверкой заполняемых документов и приоритетным получением документов.
+                                    </xs:documentation>                                
+                                  </xs:annotation>
+                                  <xs:restriction base="xs:unsignedByte">
+                                    <xs:enumeration value="0"/>
+                                    <xs:enumeration value="1"/>
+                                    <xs:enumeration value="2"/>                                                    
+                                  </xs:restriction>
+                                </xs:simpleType>
+                              </xs:attribute>
+                              <xs:attribute name="CheckContents" type="st:flag" use="optional" default="0">
+                                <xs:annotation>
+                                  <xs:documentation>Проверка комплектности</xs:documentation>
+                                  <xs:documentation>1 - услуга выбрана</xs:documentation>
+                                </xs:annotation>
+                              </xs:attribute>
+                              <xs:attribute name="Verify" type="st:flag" use="optional" default="0">
+                                <xs:annotation>
+                                  <xs:documentation>Проверка работоспособности</xs:documentation>
+                                  <xs:documentation>1 - услуга выбрана</xs:documentation>
+                                </xs:annotation>
+                              </xs:attribute>
+                              <xs:attribute name="TryOn" type="st:flag" use="optional" default="0">
+                                <xs:annotation>
+                                  <xs:documentation>Примерка</xs:documentation>
+                                  <xs:documentation>1 - услуга выбрана</xs:documentation>
+                                </xs:annotation>
+                              </xs:attribute>
+                              <xs:attribute name="ByHand" type="st:flag" use="optional" default="0">
+                                <xs:annotation>
+                                  <xs:documentation>Доставка лично в руки</xs:documentation>
+                                  <xs:documentation>1 - услуга выбрана</xs:documentation>
+                                </xs:annotation>
+                              </xs:attribute>
+                              <xs:attribute name="EveningDelivery" type="st:flag" use="optional" default="0">
+                                <xs:annotation>
+                                  <xs:documentation>Вечерняя доставка</xs:documentation>
+                                  <xs:documentation>1 - услуга выбрана</xs:documentation>
+                                </xs:annotation>
+                              </xs:attribute>
+                              <xs:attribute name="SaturdayDelivery" type="st:flag" use="optional" default="0">
+                                <xs:annotation>
+                                  <xs:documentation>Субботняя доставка</xs:documentation>
+                                  <xs:documentation>1 - услуга выбрана</xs:documentation>
+                                </xs:annotation>
+                              </xs:attribute>
+                              <xs:attribute name="PaidByReceiver" type="st:flag" use="optional" default="0">
+                                <xs:annotation>
+                                  <xs:documentation>Оплата получателем</xs:documentation>
+                                  <xs:documentation>1 - услуга выбрана</xs:documentation>
+                                </xs:annotation>
+                              </xs:attribute>
+                              <xs:attribute name="AgreedDelivery" type="st:flag" use="optional" default="0">
+                                <xs:annotation>
+                                  <xs:documentation>Согласование даты и времени доставки</xs:documentation>
+                                  <xs:documentation>1 - услуга выбрана</xs:documentation>
+                                </xs:annotation>
+                              </xs:attribute>
+                              <xs:attribute name="IDC" type="st:flag" use="optional" default="0">
+                                <xs:annotation>
+                                  <xs:documentation>Индивидуальный контроль доставки</xs:documentation>
+                                  <xs:documentation>1 - услуга выбрана</xs:documentation>
+                                </xs:annotation>
+                              </xs:attribute>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element name="SMS" minOccurs="0" maxOccurs="1">
+                            <xs:complexType>
+                              <xs:attribute name="SMStoShipper" type="xs:byte" use="optional" default="0">
+                                <xs:annotation>
+                                  <xs:documentation>SMS-информирование отправителя</xs:documentation>
+                                  <xs:documentation>1 - услуга выбрана</xs:documentation>
+                                </xs:annotation>
+                              </xs:attribute>
+                              <xs:attribute name="SMSNumberShipper" type="xs:string" use="optional" />
+                              <xs:attribute name="SMStoReceiver" type="xs:byte" use="optional" default="0">
+                                <xs:annotation>
+                                  <xs:documentation>SMS-информирование получателя</xs:documentation>
+                                  <xs:documentation>1 - услуга выбрана</xs:documentation>
+                                </xs:annotation>
+                              </xs:attribute>
+                              <xs:attribute name="SMSNumberReceiver" type="xs:string" use="optional" />
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element name="Pieces" minOccurs="1" maxOccurs="1">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element minOccurs="1" maxOccurs="unbounded" name="Piece">
+                                  <xs:complexType>
+                                    <xs:sequence minOccurs="0" maxOccurs="unbounded">
+                                      <xs:element maxOccurs="unbounded" name="SubPiece">
+                                        <xs:complexType>
+                                          <xs:attribute name="Description" type="st:String255" use="required" />
+                                          <xs:attribute name="Cost" type="xs:float" use="required" />
+                                          <xs:attribute name="ProductCode" type="st:String255" use="optional" />
+                                          <xs:attribute name="Info" type="st:String255" use="optional" />
+                                          <xs:attribute name="Quantity" type="xs:positiveInteger" use="optional" default="1" />
+                                        </xs:complexType>
+                                      </xs:element>
+                                    </xs:sequence>
+                                    <xs:attribute name="Description">
+                                      <xs:simpleType>
+                                        <xs:restriction base="xs:byte">
+                                          <xs:minInclusive value="15" />
+                                          <xs:maxInclusive value="24" />
+                                        </xs:restriction>
+                                      </xs:simpleType>
+                                    </xs:attribute>
+                                    <xs:attribute name="PieceID" use="optional" type="st:BarCode" />
+                                    <xs:attribute name="ClientBarcode" type="st:String255" use="optional" />
+                                    <xs:attribute name="Weight" type="xs:float" use="optional" default="0" />
+                                    <xs:attribute name="Length" type="xs:float" use="optional" default="0" />
+                                    <xs:attribute name="Width" type="xs:float" use="optional" default="0" />
+                                    <xs:attribute name="Depth" type="xs:float" use="optional" default="0" />
+                                  </xs:complexType>
+                                </xs:element>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:all>
+                        <xs:attribute name="Action" use="required">
+                          <xs:simpleType>
+                            <xs:annotation>
+                              <xs:documentation>Действие, которое должно быть применено к данной накладной:</xs:documentation>
+                              <xs:documentation>N – создать новую накладную в системе, U - модифицировать существующую.</xs:documentation>
+                            </xs:annotation>
+                            <xs:restriction base="xs:string">
+                              <xs:pattern value="N|U" />
+                            </xs:restriction>
+                          </xs:simpleType>
+                        </xs:attribute>
+                        <xs:attribute name="ShipmentNumber" type="xs:unsignedLong" use="optional" />
+                        <xs:attribute name="ShipRefNum" type="st:String50" use="optional" />
+                        <xs:attribute name="PickUpType" default="C">
+                          <xs:simpleType>
+                            <xs:annotation>
+                              <xs:documentation>Вид приема, выбор из справочника:</xs:documentation>
+                              <xs:documentation>W - в окне приема, C - по вызову.</xs:documentation>
+                            </xs:annotation>
+                            <xs:restriction base="xs:string">
+                              <xs:pattern value="W|C" />
+                            </xs:restriction>
+                          </xs:simpleType>
+                        </xs:attribute>
+                        <xs:attribute name="ProductCode" default="PelSt">
+                          <xs:simpleType>
+                            <xs:annotation>
+                              <xs:documentation>Вид сервиса, выбор из справочника:</xs:documentation>
+                              <xs:documentation>"Dox" - Колибри-документ; "Gep13" - Гепард-Экспресс 13; "Gep18" - Гепард-Экспресс 18; "GepEx" - Гепард-Экспресс; "PelSt" - Пеликан-Стандарт;</xs:documentation>
+                              <xs:documentation>"PelEc" - Пеликан-Эконом; "BisCa" - Бизон-Карго; "BisAv" - Бизон-Авиа; "BisSt" - Бизон-Стандарт; "BisEc" - Бизон-Эконом; "Freig" - Фрахт; "PelOn" - Пеликан-Онлайн;</xs:documentation>
+                              <xs:documentation>"Gep10" - Гепард-Экспресс 10; "PelIn" - Пеликан-Интернешнл.</xs:documentation>
+                            </xs:annotation>
+                            <xs:restriction base="xs:string">
+                              <xs:enumeration value="Dox" />
+                              <xs:enumeration value="Gep13" />
+                              <xs:enumeration value="Gep18" />
+                              <xs:enumeration value="GepEx" />
+                              <xs:enumeration value="PelSt" />
+                              <xs:enumeration value="PelEc" />
+                              <xs:enumeration value="BisCa" />
+                              <xs:enumeration value="BisAv" />
+                              <xs:enumeration value="BisSt" />
+                              <xs:enumeration value="BisEc" />
+                              <xs:enumeration value="Freig" />
+                              <xs:enumeration value="PelOn" />
+                              <xs:enumeration value="Gep10" />
+                              <xs:enumeration value="PelIn" />
+                              <xs:enumeration value="GepIntl" />
+                            </xs:restriction>
+                          </xs:simpleType>
+                        </xs:attribute>
+                        <xs:attribute name="CODDeliverySum" type="xs:float" default="0" />
+                        <xs:attribute name="CODGoodsSum" type="xs:float" default="0" />
+                        <xs:attribute name="FullDescription" type="xs:string" use="optional" />
+                        <xs:attribute name="PiecesCount" type="xs:unsignedInt" use="required" />
+                        <xs:attribute name="DeliveryDate" type="xs:string" use="optional" />
+                        <xs:attribute name="DeliveryTime" default="WD">
+                          <xs:simpleType>
+                            <xs:annotation>
+                              <xs:documentation>Время доставки, выбор из справочника:</xs:documentation>
+                              <xs:documentation>AM – с 9 до 14, PM – с 14 до 18, WD – с 9 до 18, AM1 - с 9 до 13, PM1 - с 13 до 17, PM2 - с 17 до 21, WD1 - с 9 до 21</xs:documentation>
+                            </xs:annotation>
+                            <xs:restriction base="xs:string">
+                              <xs:enumeration value="AM" />
+                              <xs:enumeration value="PM" />
+                              <xs:enumeration value="WD" />
+                              <xs:enumeration value="AM1" />
+                              <xs:enumeration value="PM1" />
+                              <xs:enumeration value="WD1" />
+                              <xs:enumeration value="PM2" />
+                            </xs:restriction>
+                          </xs:simpleType>
+                        </xs:attribute>
+                        <xs:attribute name="InsuranceType" use="required">
+                          <xs:simpleType>
+                            <xs:annotation>
+                              <xs:documentation>Тип страхования, выбор из справочника:</xs:documentation>
+                              <xs:documentation>VAL - объявленная ценность, INS - оценочная стоимость</xs:documentation>
+                            </xs:annotation>
+                            <xs:restriction base="xs:string">
+                              <xs:pattern value="VAL|INS" />
+                            </xs:restriction>
+                          </xs:simpleType>
+                        </xs:attribute>
+                        <xs:attribute name="InsuranceSum" type="xs:float" default="0" />
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                  <xs:attribute name="ContractNumber" type="st:ICN" use="required" />
+                  <xs:attribute name="TotalShipments" type="xs:unsignedInt" use="optional" default="0" />
+                  <xs:attribute name="TotalInsurance" type="xs:float" use="optional" default="0" />
+                  <xs:attribute name="TotalDeclared" type="xs:float" use="optional" default="0" />
+                  <xs:attribute name="TotalCOD" type="xs:float" use="optional" default="0" />
+                  <xs:attribute name="TotalPieces" type="xs:unsignedInt" use="optional" default="0" />
+                  <xs:attribute name="TotalWeight" type="xs:float" use="optional" default="0" />
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
