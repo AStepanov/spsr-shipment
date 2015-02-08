@@ -25,6 +25,17 @@ class BaseType
     }
 
     /**
+     * Add element to collection
+     * @param string $name
+     * @param mixed $value
+     */
+    public function push($name, $value)
+    {
+        if (!isset($this->_dataRaw[$name])) $this->_dataRaw[$name] = [];
+        array_push($this->_dataRaw[$name], $value);
+    }
+
+    /**
      *
      * @param string|null $forceXmlNs
      * @return SimpleXMLElement
