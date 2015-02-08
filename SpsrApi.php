@@ -2,7 +2,8 @@
 
 namespace stp\spsr;
 
-use stp\spsr\message\BaseMessage;
+use stp\spsr\message\BaseMessage,
+    stp\spsr\response\BaseResponse;
 use SimpleXMLElement;
 
 
@@ -96,8 +97,7 @@ class SpsrApi
     /**
      * @param BaseMessage $message
      * @param string|null $sid session id
-     * @return response\BaseResponse
-     * @throws SpsrException
+     * @return BaseResponse|BaseResponse[]
      */
     public function request(BaseMessage $message, $sid = null)
     {
