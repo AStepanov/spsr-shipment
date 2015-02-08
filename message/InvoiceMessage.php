@@ -8,12 +8,12 @@ use SimpleXMLElement;
 
 /**
  * @property int $ContractNumber ICN
- * @property int $TotalShipments|null Общее количество накладных в реестре
- * @property float $TotalInsurance|null Суммарная оценочная стоимость (в рублях) - сумма значений атрибутов InsuranceSum по всем накладным, для которых для атрибута InsuranceType задано значение "INS"
- * @property float $TotalDeclared|null Суммарная объявленная ценность (в рублях) - сумма значений атрибутов InsuranceSum по всем накладным, для которых для атрибута InsuranceType задано значение "VAL"
- * @property float $TotalCOD|null Сумма наложенного платежа в рублях по накладным с дополнительной услугой "Оплата товара в момент вручения". Если заданы значения атрибутов и TotalCOD и Cost, то значение атрибута TotalCOD игнорируется
- * @property int $TotalPieces|null Общее количество вложимых во всех накладных
- * @property float $TotalWeight|null Общий вес (в кг) всех вложимых во всех накладных
+ * @property int|null $TotalShipments Общее количество накладных в реестре
+ * @property float|null $TotalInsurance Суммарная оценочная стоимость (в рублях) - сумма значений атрибутов InsuranceSum по всем накладным, для которых для атрибута InsuranceType задано значение "INS"
+ * @property float|null $TotalDeclared Суммарная объявленная ценность (в рублях) - сумма значений атрибутов InsuranceSum по всем накладным, для которых для атрибута InsuranceType задано значение "VAL"
+ * @property float|null $TotalCOD Сумма наложенного платежа в рублях по накладным с дополнительной услугой "Оплата товара в момент вручения". Если заданы значения атрибутов и TotalCOD и Cost, то значение атрибута TotalCOD игнорируется
+ * @property int|null $TotalPieces Общее количество вложимых во всех накладных
+ * @property float|null $TotalWeight Общий вес (в кг) всех вложимых во всех накладных
  * @property InvoiceType[] $Invoices Общий вес (в кг) всех вложимых во всех накладных
  *
  */
