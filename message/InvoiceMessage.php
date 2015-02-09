@@ -77,8 +77,7 @@ class InvoiceMessage extends BaseMessage
     {
         $result = [];
         foreach($response->Invoice as $invoice) {
-            $attr = (array)$invoice->attributes();
-            $result[] = new Invoice($attr['@attributes']);
+            $result[] = self::xmlNode2Type($invoice, Invoice::className());
         }
 
         return $result;

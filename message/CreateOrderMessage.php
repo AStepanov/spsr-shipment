@@ -70,10 +70,9 @@ class CreateOrderMessage extends BaseMessage
      */
     public function buildResponse(SimpleXMLElement $response)
     {
-        $result = null;
         $root = $this->getRoot();
-        $attr = (array)$response->$root->attributes();
-        $result = new AddOrder($attr['@attributes']);
+        /** @var AddOrder $result */
+        $result = self::xmlNode2Type($response->$root, AddOrder::className());
         $result->setResponse($response);
 
         return $result;

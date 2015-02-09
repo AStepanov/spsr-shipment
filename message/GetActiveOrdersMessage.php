@@ -37,8 +37,7 @@ class GetActiveOrdersMessage extends BaseMessage
         $result = [];
         $root = $this->getRoot();
         foreach($response->Orders->Order as $order) {
-            $attr = (array)$order->attributes();
-            $result[] = new Order($attr['@attributes']);
+            $result[] = self::xmlNode2Type($order, Order::className());
         }
 
         return $result;

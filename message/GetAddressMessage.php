@@ -35,8 +35,7 @@ class GetAddressMessage extends BaseMessage
         $result = [];
         $root = $this->getRoot();
         foreach($response->$root->Address as $addr) {
-            $attr = (array)$addr->attributes();
-            $result[] = new Address($attr['@attributes']);
+            $result[] = self::xmlNode2Type($addr, Address::className());
         }
 
         return $result;
