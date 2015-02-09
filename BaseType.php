@@ -63,10 +63,33 @@ class BaseType
         return $xml;
     }
 
+    /**
+     * @param SimpleXMLElement $to
+     * @param SimpleXMLElement $from
+     */
     protected function xml_append(SimpleXMLElement $to, SimpleXMLElement $from) {
         $toDom = dom_import_simplexml($to);
         $fromDom = dom_import_simplexml($from);
         $toDom->appendChild($toDom->ownerDocument->importNode($fromDom, true));
+    }
+
+    /**
+     * @return string the fully qualified name of this class.
+     */
+    public static function className()
+    {
+        return get_called_class();
+    }
+
+    /**
+     * @param SimpleXMLElement $node
+     * @param string $typeName BaseType class name
+     * @return BaseType
+     */
+    static protected function xmlNode2Type(SimpleXMLElement $node, $typeName)
+    {
+        $attr = (array)$node->attributes();
+        return new $typeName($attr['@attributes']);
     }
 
 }

@@ -63,7 +63,7 @@ class InvoiceMessage extends BaseMessage
             $info->addAttribute($attr, $value);
         }
         if (!$this->Invoices) {
-            throw new \RuntimeException('Invoice attribute should be not empty');
+            throw new \RuntimeException('Invoice attribute can\'t be empty');
         }
         foreach($this->Invoices as $invoice) {
             $this->xml_append($info, $invoice->asXml($this->getXmlNs()));
