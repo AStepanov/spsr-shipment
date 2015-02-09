@@ -10,6 +10,16 @@ abstract class BaseMessage extends BaseType
 {
     protected $sid;
 
+    public function isRequiredICN()
+    {
+        return 'ICN';
+    }
+
+    public function isRequiredLogin()
+    {
+        return 'Login';
+    }
+
     abstract public function getRoot();
 
     /**

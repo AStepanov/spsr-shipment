@@ -18,6 +18,7 @@ class SpsrApi
     protected $login = null;
     protected $password = null;
     protected $sid = null;
+    protected $icn = null;
 
     /**
      * @var \Closure|null
@@ -26,9 +27,10 @@ class SpsrApi
 
     protected $companyAgent = 'Spsr Api Agent v1.0.0';
 
-    public function __construct($login = 'test', $password = 'test', $testMode = true)
+    public function __construct($login = 'test', $password = 'test', $icn = null, $testMode = true)
     {
         $this->login = $login;
+        $this->icn = $icn;
         $this->password = $password;
         $this->xmlUrl = $testMode ? self::_TEST_URL : self::_URL;
     }
@@ -75,7 +77,7 @@ class SpsrApi
 		curl_setopt($curl, CURLOPT_FOLLOWLOCATION, 1);
 		curl_setopt($curl, CURLOPT_VERBOSE, 0);
         curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type: application/xml'));
-        curl_setopt($curl, CURLOPT_CONNECTTIMEOUT, 5);
+        curl_setopt($curl, CURLOPT_CONNECTTIMEOUT, 10);
         curl_setopt($curl, CURLOPT_TIMEOUT, 20);
         if ($postData) {
             curl_setopt($curl, CURLOPT_POST, 1);
@@ -103,6 +105,10 @@ class SpsrApi
     {
         $sid || $sid = $this->session();
         $message->setSid($sid);
+        $icnAttr = $message->isRequiredICN();
+        $icnAttr && !$message->$icnAttr && $message->$icnAttr = $this->icn;
+        $loginAttr = $message->isRequiredLogin();
+        $loginAttr && !$message->$loginAttr && $message->$loginAttr = $this->login;
         $response = $this->_request($this->xmlUrl, $message->asXml()->asXML());
         $this->checkError($response);
         return $message->buildResponse($response);

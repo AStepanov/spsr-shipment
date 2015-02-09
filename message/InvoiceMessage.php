@@ -19,6 +19,15 @@ use SimpleXMLElement;
  */
 class InvoiceMessage extends BaseMessage
 {
+    public function isRequiredICN()
+    {
+        return 'ContractNumber';
+    }
+
+    public function isRequiredLogin()
+    {
+        return false;
+    }
 
     public function getRoot()
     {
