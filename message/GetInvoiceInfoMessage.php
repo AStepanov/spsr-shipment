@@ -60,7 +60,7 @@ class GetInvoiceInfoMessage extends BaseMessage
         $result = [];
         foreach($response->GetInvoiceInfo->Invoice as $invoiceInfo) {
             /** @var InvoiceInfo $invoice */
-            $invoice = self::xmlNode2Type($invoiceInfo, InvoiceInfoType::className());
+            $invoice = self::xmlNode2Type($invoiceInfo, InvoiceInfo::className());
             $invoice->Shipper = self::xmlNode2Type($invoiceInfo->Shipper, ShipperType::className());
             $invoice->Receiver = self::xmlNode2Type($invoiceInfo->Receiver, ReceiverType::className());
             foreach($invoiceInfo->Pieces->Piece as $piece) {

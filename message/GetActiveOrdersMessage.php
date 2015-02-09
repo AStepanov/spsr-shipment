@@ -35,7 +35,6 @@ class GetActiveOrdersMessage extends BaseMessage
     public function buildResponse(\SimpleXMLElement $response)
     {
         $result = [];
-        $root = $this->getRoot();
         foreach($response->Orders->Order as $order) {
             $result[] = self::xmlNode2Type($order, Order::className());
         }

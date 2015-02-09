@@ -31,5 +31,15 @@ use stp\spsr\type\PieceType;
  */
 class InvoiceInfo extends BaseResponse
 {
+    const STATE_IN_PROGRESS = 'Обработка';
+    const STATE_FINISHED = 'Доставлено';
+
+    /**
+     * @return bool
+     */
+    public function isDelivered()
+    {
+        return $this->CurState == self::STATE_FINISHED;
+    }
 
 }
