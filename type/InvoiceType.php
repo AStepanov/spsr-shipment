@@ -24,6 +24,8 @@ use stp\spsr\BaseType;
  * @property ReceiverType $Receiver
  * @property ShipperType $Shipper
  * @property CustomerInfoType $CustomerInfo
+ * @property AdditionalServicesType $AdditionalServices
+ * @property SMSType $SMS
  * @property PieceType[] $Pieces
  */
 class InvoiceType extends BaseType
