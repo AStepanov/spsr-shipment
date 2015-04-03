@@ -39,7 +39,7 @@ class InvoiceInfo extends BaseResponse
      */
     public function isDelivered()
     {
-        return $this->CurState && mb_strpos($this->CurState, self::STATE_FINISHED, 'utf-8') !== false;
+        return $this->CurState && mb_strpos($this->CurState, self::STATE_FINISHED, null, 'utf-8') !== false;
     }
 
 }
