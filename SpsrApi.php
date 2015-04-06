@@ -5,6 +5,8 @@ namespace stp\spsr;
 use stp\spsr\message\BaseMessage,
     stp\spsr\response\BaseResponse;
 use SimpleXMLElement;
+use stp\spsr\message\BaseXmlMessage;
+use stp\spsr\message\TariffMessage;
 
 
 class SpsrApi
@@ -109,7 +111,15 @@ class SpsrApi
         $icnAttr && !$message->$icnAttr && $message->$icnAttr = $this->icn;
         $loginAttr = $message->isRequiredLogin();
         $loginAttr && !$message->$loginAttr && $message->$loginAttr = $this->login;
-        $response = $this->_request($this->xmlUrl, $message->asXml()->asXML());
+        $response = null;
+        if ($message instanceof BaseXmlMessage) {
+            $response = $this->_request($this->xmlUrl, $message->asXml()->asXML());
+        } elseif($message instanceof TariffMessage) {
+            $response = $this->_request($message->getRequestUrl());
+        } else {
+            new SpsrException('Not implemented');
+        }
+
         $this->checkError($response);
         return $message->buildResponse($response);
     }
@@ -125,6 +135,9 @@ class SpsrApi
         $errorMessageEN = isset($response->error['ErrorMessageEN']) ? (string)$response->error['ErrorMessageEN'] : '';
         $errorMessageRU = isset($response->error['ErrorMessageRU']) ? (string)$response->error['ErrorMessageRU'] : '';
         $errorMessage = isset($response->error['ErrorMessage']) ? (string)$response->error['ErrorMessage'] : '';
+        if (!$errorMessage) {
+            $errorMessage = isset($response->Error) ? (string)$response->Error : '';
+        }
 
         throw new SpsrException($errorMessageEN ?: $errorMessageRU ?: $errorMessage ?: 'Unknown Error', (int)$response->Result);
     }

@@ -12,7 +12,7 @@ use stp\spsr\response\Order;
  * @property string $ICN
  * @property string $Login
  */
-class GetActiveOrdersMessage extends BaseMessage
+class GetActiveOrdersMessage extends BaseXmlMessage
 {
     public function getRoot()
     {
@@ -35,8 +35,10 @@ class GetActiveOrdersMessage extends BaseMessage
     public function buildResponse(\SimpleXMLElement $response)
     {
         $result = [];
-        foreach($response->Orders->Order as $order) {
-            $result[] = self::xmlNode2Type($order, Order::className());
+        if (isset($response->Orders->Order)) {
+            foreach($response->Orders->Order as $order) {
+                $result[] = self::xmlNode2Type($order, Order::className());
+            }
         }
 
         return $result;

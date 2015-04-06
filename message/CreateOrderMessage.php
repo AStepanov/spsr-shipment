@@ -25,7 +25,7 @@ use SimpleXMLElement;
  * @property int $Width ширина отправления в cm
  * @property int $Depth глубина отправления в cm
  */
-class CreateOrderMessage extends BaseMessage
+class CreateOrderMessage extends BaseXmlMessage
 {
     /**
      * from 9:00 to 13:00

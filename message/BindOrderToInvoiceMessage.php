@@ -11,7 +11,7 @@ namespace stp\spsr\message;
  * @property int $Order_ID идентификатор активного заказа (см GetActiveOrders)
  * @property int $Order_Owner_ID идентификатор активного заказа (см GetActiveOrders)
  */
-class BindOrderToInvoiceMessage extends BaseMessage
+class BindOrderToInvoiceMessage extends BaseXmlMessage
 {
     public function getRoot()
     {

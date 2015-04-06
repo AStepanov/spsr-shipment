@@ -18,7 +18,7 @@ use SimpleXMLElement;
  * @property InvoiceInfoType[] $InvoiceInfo
  * string|null $BarCode
  */
-class GetInvoiceInfoMessage extends BaseMessage
+class GetInvoiceInfoMessage extends BaseXmlMessage
 {
     public function getRoot()
     {

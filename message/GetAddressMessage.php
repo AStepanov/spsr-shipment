@@ -10,7 +10,7 @@ use stp\spsr\response\Address;
  * @property string $ICN
  * @property int $AddressType
  */
-class GetAddressMessage extends BaseMessage
+class GetAddressMessage extends BaseXmlMessage
 {
 
     public function getRoot()
@@ -34,8 +34,10 @@ class GetAddressMessage extends BaseMessage
     {
         $result = [];
         $root = $this->getRoot();
-        foreach($response->$root->Address as $addr) {
-            $result[] = self::xmlNode2Type($addr, Address::className());
+        if (isset($response->$root->Address)) {
+            foreach($response->$root->Address as $addr) {
+                $result[] = self::xmlNode2Type($addr, Address::className());
+            }
         }
 
         return $result;

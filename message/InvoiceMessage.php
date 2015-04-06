@@ -17,7 +17,7 @@ use SimpleXMLElement;
  * @property InvoiceType[] $Invoices Общий вес (в кг) всех вложимых во всех накладных
  *
  */
-class InvoiceMessage extends BaseMessage
+class InvoiceMessage extends BaseXmlMessage
 {
     public function isRequiredICN()
     {
