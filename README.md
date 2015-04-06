@@ -51,11 +51,28 @@ $cities = $api->request($msg);
 ```
 ## Implemented API Methods
 
-- [x] Tariff Calculation
-- [x] CreateOrder
-- [x] Invoice
-- [x] GetInvoiceInfo
-- [x] BindOrderToInvoice
-- [x] GetActiveOrders
-- [x] GetAddress
-- [x] GetCities
+- [x] [Tariff Calculation](message/TariffMessage.php)
+- [x] [WACreateOrder](message/CreateOrderMessage.php)
+- [x] [WAXmlConverter](message/InvoiceMessage.php)
+- [x] [WAGetInvoiceInfo 1.1](message/GetInvoiceInfoMessage.php)
+- [x] [WABindOrderToInvoice](message/BindOrderToInvoiceMessage.php)
+- [x] [WAGetActiveOrders](message/GetActiveOrdersMessage.php)
+- [x] [WAGetAddress](message/GetAddressMessage.php)
+- [x] [WAGetCities](message/GetCitiesMessage.php)
+- [ ] WANewInvoicesByFile
+- [ ] WAInvSessionInfo
+- [ ] WAGetExtMon
+- [ ] WAGetServices
+- [ ] WAGetStreet
+- [ ] WAGetEncloseType
+- [ ] WAAddAddress
+- [ ] WAEditAddress
+- [ ] WADelAddress
+- [ ] WAGetOrders
+- [ ] WACancelOrder
+- [ ] WACheckGetQuotaByAddress
+- [ ] WAReservQuota
+- [ ] WAReservQuotaDelete
+
+
+## Pull requests are very welcome!
