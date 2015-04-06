@@ -49,6 +49,9 @@ $msg->CityName = 'Москва';
 /** @var City[] $cities */
 $cities = $api->request($msg);
 ```
+
+For more information, see [USAGE.md](USAGE.md)
+
 ## Implemented API Methods
 
 - [x] [Tariff Calculation](message/TariffMessage.php)
