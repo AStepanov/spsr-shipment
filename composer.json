@@ -1,8 +1,8 @@
 {
     "name": "stp/spsr-shipment",
     "description": "API for SPSR-EXPRESS shipping",
-    "keywords": ["api", "shipping", "delivery"],
-    "homepage": "https://github.com/AStepanov",
+    "keywords": ["api", "shipping", "delivery", "shipments", "spsr"],
+    "homepage": "https://github.com/AStepanov/spsr-shipment",
     "type": "library",
     "license": "MIT",
     "authors": [

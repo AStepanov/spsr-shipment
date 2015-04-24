@@ -22,6 +22,14 @@ class SpsrApi
     protected $sid = null;
     protected $icn = null;
 
+    protected $options = [
+        CURLOPT_RETURNTRANSFER => 1,
+        CURLOPT_FOLLOWLOCATION => 1,
+        CURLOPT_VERBOSE => 0,
+        CURLOPT_HTTPHEADER => ['Content-Type: application/xml'],
+        CURLOPT_TIMEOUT => 20
+    ];
+
     /**
      * @var \Closure|null
      */
@@ -73,29 +81,23 @@ class SpsrApi
 
     public function _request($url, $postData = null)
     {
-		$curl = curl_init();
-		curl_setopt($curl, CURLOPT_URL, $url);
-		curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-		curl_setopt($curl, CURLOPT_FOLLOWLOCATION, 1);
-		curl_setopt($curl, CURLOPT_VERBOSE, 0);
-        curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type: application/xml'));
-        curl_setopt($curl, CURLOPT_CONNECTTIMEOUT, 10);
-        curl_setopt($curl, CURLOPT_TIMEOUT, 20);
+        $curl = curl_init();
+        curl_setopt($curl, CURLOPT_URL, $url);
         if ($postData) {
             curl_setopt($curl, CURLOPT_POST, 1);
             curl_setopt($curl, CURLOPT_POSTFIELDS, $postData);
         }
-
-		$result = curl_exec($curl);
+        curl_setopt_array($curl, $this->options);
+        $result = curl_exec($curl);
         if ($result === false) {
             $err = curl_error($curl);
             curl_close($curl);
             throw new SpsrException('Error on request: ' . $err);
         }
-		curl_close($curl);
+        curl_close($curl);
         libxml_use_internal_errors(true);
         $xmlResult = new SimpleXMLElement($result);
-		return $xmlResult;
+        return $xmlResult;
     }
 
     /**
@@ -140,6 +142,15 @@ class SpsrApi
         }
 
         throw new SpsrException($errorMessageEN ?: $errorMessageRU ?: $errorMessage ?: 'Unknown Error', (int)$response->Result);
+    }
+
+    /**
+     * Set curl options
+     * @param array $options
+     */
+    public function setOptions(array $options)
+    {
+        $this->options = array_replace($this->options, $options);
     }
 
 }
